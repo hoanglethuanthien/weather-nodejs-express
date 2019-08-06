@@ -1,10 +1,11 @@
+require('dotenv').config();
 const request = require('request');
-
 const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express()
 const apiKey = 'c11b3cfe0627c065f94aaf93d9cc748c';
+let port = process.env.PORT || 3001;
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -13,7 +14,6 @@ app.set('view engine', 'ejs' );
 app.get('/', function (req, res) {
 	res.render('index', {weather: null, error:null});
 })
-
 
 app.post('/', function (req, res) {
 
@@ -37,6 +37,6 @@ app.post('/', function (req, res) {
 	});
 })
 
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000!');
+app.listen(port, function () {
+	console.log('Example app listening on port ' + port);
 })
